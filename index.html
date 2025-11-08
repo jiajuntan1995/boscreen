@@ -1,28 +1,3 @@
-const blacklistCompanies = ["PERSOLKELLY", "Hays", "Randstad", "Robert Walters", "Recruit Express", "ARGES GLOBAL"];
-
-function hideUnwantedJobs() {
-    const companyElements = document.querySelectorAll('p[data-testid="company-hire-info"]');
-    companyElements.forEach(companyEl => {
-        const companyName = companyEl.innerText.trim().toLowerCase();
-        const shouldHide = blacklistCompanies.some(name => companyName.includes(name.toLowerCase()));
-        if (shouldHide) {
-            // Find the job card container and hide it
-            let jobCard = companyEl.closest('div[class*="card"]');
-            if (jobCard) {
-                jobCard.style.display = 'none';
-            }
-        }
-    });
-}
-
-const observer = new MutationObserver((mutations) => {
-    mutations.forEach(() => hideUnwantedJobs());
-});
-
-observer.observe(document.body, { childList: true, subtree: true });
-
-// Run at page load
-hideUnwantedJobs();
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,3 +96,4 @@ hideUnwantedJobs();
 
 </body>
 </html>
+
