@@ -1,0 +1,123 @@
+const blacklistCompanies = ["PERSOLKELLY", "Hays", "Randstad", "Robert Walters", "Recruit Express", "ARGES GLOBAL"];
+
+function hideUnwantedJobs() {
+    const companyElements = document.querySelectorAll('p[data-testid="company-hire-info"]');
+    companyElements.forEach(companyEl => {
+        const companyName = companyEl.innerText.trim().toLowerCase();
+        const shouldHide = blacklistCompanies.some(name => companyName.includes(name.toLowerCase()));
+        if (shouldHide) {
+            // Find the job card container and hide it
+            let jobCard = companyEl.closest('div[class*="card"]');
+            if (jobCard) {
+                jobCard.style.display = 'none';
+            }
+        }
+    });
+}
+
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach(() => hideUnwantedJobs());
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+// Run at page load
+hideUnwantedJobs();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoScreen - Paper Ads for People Who Can't Stand Screens</title>
+<style>
+  body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; line-height: 1.6; color: #333; }
+  a { text-decoration: none; }
+  header { background: #f4f4f4; padding: 60px 20px; text-align: center; }
+  header h1 { font-size: 2.5em; margin-bottom: 10px; color: #E53935; }
+  header p { font-size: 1.2em; margin-bottom: 20px; }
+  .cta-btn { background: #E53935; color: #fff; padding: 15px 30px; border-radius: 5px; font-size: 1.1em; display: inline-block; }
+  .section { padding: 60px 20px; text-align: center; }
+  .section h2 { font-size: 2em; margin-bottom: 30px; color: #E53935; }
+  .steps, .pricing { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+  .step, .price-tier { background: #f9f9f9; padding: 20px; border-radius: 10px; width: 250px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  .step img, .price-tier img { max-width: 80px; margin-bottom: 15px; }
+  footer { background: #333; color: #fff; text-align: center; padding: 40px 20px; }
+  footer a { color: #E53935; margin: 0 10px; }
+  @media (max-width: 768px) {
+    .steps, .pricing { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Bo screens, bo problem.</h1>
+  <p>Your ads, unplugged and unavoidable. Flyers in taxis and high-traffic spots — real eyeballs guaranteed.</p>
+  <a href="#pricing" class="cta-btn">Start Your Flyer Campaign</a>
+  <div style="margin-top:20px;">
+    <img src="https://via.placeholder.com/600x300?text=Taxi+Backseat+Flyers" alt="Taxi backseat with flyers">
+  </div>
+</header>
+
+<section class="section" id="how-it-works">
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div class="step">
+      <img src="https://via.placeholder.com/80?text=Paper" alt="Paper icon">
+      <h3>You Give Us Your Message</h3>
+      <p>Text, image, or design.</p>
+    </div>
+    <div class="step">
+      <img src="https://via.placeholder.com/80?text=Taxi" alt="Taxi icon">
+      <h3>We Print & Place</h3>
+      <p>Flyers go directly into taxis and prime locations.</p>
+    </div>
+    <div class="step">
+      <img src="https://via.placeholder.com/80?text=Chart" alt="Chart icon">
+      <h3>Track Your Results</h3>
+      <p>QR codes, promo codes, or simple follow-ups.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="why-boscreen">
+  <h2>Why BoScreen?</h2>
+  <ul style="list-style:none; padding:0; font-size:1.1em;">
+    <li>✅ No Screens, No Noise – passengers actually see your ads.</li>
+    <li>✅ High Engagement – flyers get handled, read, and acted on.</li>
+    <li>✅ Affordable & Measurable – clear ROI per ride.</li>
+    <li>✅ Singaporean-tested – proven local method.</li>
+  </ul>
+</section>
+
+<section class="section" id="pricing">
+  <h2>Pricing Snapshot</h2>
+  <div class="pricing">
+    <div class="price-tier">
+      <h3>Starter</h3>
+      <p>100 flyers, 10 taxis — $X</p>
+    </div>
+    <div class="price-tier">
+      <h3>Growth</h3>
+      <p>500 flyers, 50 taxis — $Y</p>
+    </div>
+    <div class="price-tier">
+      <h3>Custom</h3>
+      <p>Tailored campaigns for maximum reach</p>
+    </div>
+  </div>
+  <div style="margin-top:20px;">
+    <a href="mailto:your@email.com" class="cta-btn">Book Your Campaign Now</a>
+  </div>
+</section>
+
+<footer>
+  <p>BoScreen: Paper ads for people who can’t stand another screen.</p>
+  <p>Contact: <a href="mailto:your@email.com">your@email.com</a> | <a href="tel:+6512345678">+65 1234 5678</a></p>
+  <p>
+    <a href="#">Instagram</a> | <a href="#">Telegram</a> | <a href="#">LinkedIn</a>
+  </p>
+</footer>
+
+</body>
+</html>
